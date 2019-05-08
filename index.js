@@ -9,15 +9,28 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Connect to MongoDB
-mongoose
-  .connect(
-    'mongodb://mongo:27017/docker-node-mongo',
-    { useNewUrlParser: true }
-  )
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+// note that it says 'mongo' and not 'localhost'
+// use the service name that you linked for the database
+let Item = null;
+function connectMongoose() {
+  setTimeout(function () {
+    mongoose
+      .connect(
+        'mongodb://BRMSIT:5hyG#AhNFa5P@mongo:27017/meteor',
+        { useNewUrlParser: true }
+      )
+      .then(() => {
+        Item = require('./models/Item');
+        console.log('MongoDB Connected')
+      })
+      .catch(err => {
+        console.error('err: ', err)
+      });
 
-const Item = require('./models/Item');
+  }, 5000);
+}
+
+connectMongoose()
 
 app.get('/', (req, res) => {
   Item.find()
