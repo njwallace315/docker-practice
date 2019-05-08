@@ -16,7 +16,7 @@ function connectMongoose() {
   setTimeout(function () {
     mongoose
       .connect(
-        'mongodb://BRMSIT:5hyG#AhNFa5P@mongo:27017/meteor',
+        'mongodb://<username>:<password>@mongo:27017/meteor',
         { useNewUrlParser: true }
       )
       .then(() => {
